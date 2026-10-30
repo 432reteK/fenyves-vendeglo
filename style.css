@@ -456,7 +456,9 @@ img {
 .events-section {
   padding: 90px 24px;
   overflow: hidden;
-  background: var(--paper);
+  background:
+    linear-gradient(rgba(20, 25, 15, 0.55), rgba(20, 25, 15, 0.55)),
+    url("./tajkep.jpg") center / cover no-repeat;
 }
 
 .events-inner {
