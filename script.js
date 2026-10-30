@@ -103,31 +103,25 @@ const menuData = [
             ["Cézársaláta csirkemellel", "2490 Ft"]
         ]
     },
-    {
-        id: "sertes1",
-        title: "Sertéshúsételek",
-        items: [
-            ["Mustáros rántott sertésszelet majonézes burgonyával", "4390 Ft"],
-            ["Cigánypecsenye steakburgonyával", "4390 Ft"],
-            ["Cordon bleu hasábburgonyával", "4290 Ft"],
-            ["Velővel töltött sertésszelet petrezselymes burgonyával", "4390 Ft"],
-            ["Bakonyi sertésszelet galuskával", "4290 Ft"],
-            ["Brassói aprópecsenye sertésszűzből", "4390 Ft"],
-            ["Gyulai karaj csemege uborkával, sajttal és kolbásszal töltve, hasábburgonyával", "4390 Ft"]
-        ]
-    },
-    {
-        id: "sertes2",
-        title: "Csülök és sertéskülönlegességek",
-        items: [
-            ["Csülök pékné módra sült burgonyával", "4290 Ft"],
-            ["Sült csülök juhtúrós galuskával", "4290 Ft"],
-            ["Csülökpörkölt főtt burgonyával", "3890 Ft"],
-            ["Rántott velő rizzsel", "3990 Ft"],
-            ["BBQ oldalas héjában sült burgonyával, amerikai káposztasalátával", "4290 Ft"],
-            ["Tejszínes, gombás szűzérmék jázmin rizzsel", "4390 Ft"]
-        ]
-    },
+   {
+    id: "sertes1",
+    title: "Sertéshúsételek",
+    items: [
+        ["Mustáros rántott sertésszelet majonézes burgonyával", "4390 Ft"],
+        ["Cigánypecsenye steakburgonyával", "4390 Ft"],
+        ["Cordon bleu hasábburgonyával", "4290 Ft"],
+        ["Velővel töltött sertésszelet petrezselymes burgonyával", "4390 Ft"],
+        ["Bakonyi sertésszelet galuskával", "4290 Ft"],
+        ["Brassói aprópecsenye sertésszűzből", "4390 Ft"],
+        ["Gyulai karaj csemege uborkával, sajttal és kolbásszal töltve, hasábburgonyával", "4390 Ft"],
+        ["Csülök pékné módra sült burgonyával", "4290 Ft"],
+        ["Sült csülök juhtúrós galuskával", "4290 Ft"],
+        ["Csülökpörkölt főtt burgonyával", "3890 Ft"],
+        ["Rántott velő rizzsel", "3990 Ft"],
+        ["BBQ oldalas héjában sült burgonyával, amerikai káposztasalátával", "4290 Ft"],
+        ["Tejszínes, gombás szűzérmék jázmin rizzsel", "4390 Ft"]
+    ]
+},
     {
         id: "marha",
         title: "Marhahúsételek",
@@ -270,10 +264,23 @@ const menuData = [
     }
 ];
 
-const menuContainer = document.getElementById("menuCategories");
+const foodCategories = document.getElementById("foodCategories");
+const drinkCategories = document.getElementById("drinkCategories");
 
-if (menuContainer) {
-    menuData.forEach((category) => {
+const drinkIds = ["italok", "sorok", "kavek"];
+
+const foodMenu = menuData.filter(
+    category => !drinkIds.includes(category.id)
+);
+
+const drinkMenu = menuData.filter(
+    category => drinkIds.includes(category.id)
+);
+
+function renderMenu(container, categories, isDrinkMenu = false) {
+    if (!container) return;
+
+    categories.forEach((category) => {
         const section = document.createElement("article");
         section.className = "menu-category";
         section.dataset.category = category.id;
@@ -286,9 +293,6 @@ if (menuContainer) {
             const item = document.createElement("div");
             item.className = "menu-item";
 
-            const info = document.createElement("div");
-            info.className = "menu-item-info";
-
             const title = document.createElement("h4");
             title.textContent = name;
 
@@ -296,33 +300,97 @@ if (menuContainer) {
             priceElement.className = "menu-price";
             priceElement.textContent = price;
 
-            info.appendChild(title);
-            item.appendChild(info);
-            item.appendChild(priceElement);
+            item.appendChild(title);
+
+            const rightSide = document.createElement("div");
+            rightSide.className = "menu-item-right";
+
+            if (isDrinkMenu) {
+                const match = name.match(/\(([^()]*)\)\s*$/);
+
+                if (match) {
+                    const quantity = document.createElement("span");
+                    quantity.className = "menu-quantity";
+                    quantity.textContent = match[1];
+
+                    title.textContent = name.replace(/\s*\([^()]*\)\s*$/, "");
+                    rightSide.appendChild(quantity);
+                }
+            }
+
+            rightSide.appendChild(priceElement);
+            item.appendChild(rightSide);
+
             section.appendChild(item);
         });
 
-        menuContainer.appendChild(section);
-    });
-
-    const filters = document.querySelectorAll(".menu-filter");
-    const categories = menuContainer.querySelectorAll(".menu-category");
-
-    filters.forEach((button) => {
-        button.addEventListener("click", () => {
-            const selected = button.dataset.filter;
-
-            filters.forEach((filter) => {
-                const active = filter === button;
-                filter.classList.toggle("active", active);
-                filter.setAttribute("aria-pressed", String(active));
-            });
-
-            categories.forEach((category) => {
-                category.hidden =
-                    selected !== "all" &&
-                    category.dataset.category !== selected;
-            });
-        });
+        container.appendChild(section);
     });
 }
+
+renderMenu(foodCategories, foodMenu);
+renderMenu(drinkCategories, drinkMenu, true);
+
+// Kategóriaszűrők
+const filters = document.querySelectorAll(".menu-filter");
+
+filters.forEach((button) => {
+    button.addEventListener("click", () => {
+        const selected = button.dataset.filter;
+
+        filters.forEach((filter) => {
+            const active = filter === button;
+            filter.classList.toggle("active", active);
+            filter.setAttribute("aria-pressed", String(active));
+        });
+
+        document.querySelectorAll(".menu-category").forEach((category) => {
+            category.hidden =
+                selected !== "all" &&
+                category.dataset.category !== selected;
+        });
+    });
+});
+
+// Hétvégi ajánlatok betöltése a Supabase adatbázisból
+async function loadWeekendOffers() {
+    const container = document.getElementById("weekendOffersList");
+
+    if (!container) return;
+
+    const { data, error } = await supabaseClient
+        .from("weekend_offers")
+        .select("id, name, price")
+        .eq("active", true)
+        .order("sort_order", { ascending: true });
+
+    if (error) {
+        container.textContent = "A hétvégi ajánlatok jelenleg nem érhetők el.";
+        console.error("Ajánlatbetöltési hiba:", error);
+        return;
+    }
+
+    container.replaceChildren();
+
+    if (!data || data.length === 0) {
+        container.textContent = "Hamarosan új hétvégi ajánlatokkal jelentkezünk!";
+        return;
+    }
+
+    data.forEach((offer) => {
+        const card = document.createElement("article");
+        card.className = "weekend-offer-card";
+
+        const name = document.createElement("h3");
+        name.textContent = offer.name;
+
+        const price = document.createElement("p");
+        price.className = "weekend-offer-price";
+        price.textContent = offer.price;
+
+        card.append(name, price);
+        container.appendChild(card);
+    });
+}
+
+loadWeekendOffers();

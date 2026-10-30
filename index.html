@@ -148,8 +148,24 @@
             <button class="menu-filter" data-filter="kavek">Kávék</button>
         </div>
     </div>
+<section class="weekend-offers" id="weekend-offers">
+    <div class="section-heading">
+        <span class="section-subtitle">A HÉTVÉGE KEDVENCEI</span>
+        <h2>Hétvégi ajánlataink</h2>
+        <p>Válogass aktuális hétvégi különlegességeink közül!</p>
+    </div>
 
-    <div class="menu-categories" id="menuCategories"></div>
+    <div class="weekend-offers-grid" id="weekendOffersList">
+        <p class="offers-loading">Ajánlatok betöltése...</p>
+    </div>
+</section>
+    <div class="menu-list">
+    <h2 class="menu-subtitle">ÉTLAP</h2>
+    <div id="foodCategories"></div>
+
+    <h2 class="menu-subtitle">ITALLAP</h2>
+    <div id="drinkCategories"></div>
+</div>
 
     <p class="menu-disclaimer">
         Az étlapon szereplő árak forintban értendők.
@@ -267,6 +283,10 @@
       <span>© <span id="year"></span> Fenyves Vendéglő</span>
     </div>
   </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>

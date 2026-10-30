@@ -2384,4 +2384,165 @@ header nav a:hover,
     color: #e5d2a8 !important;
 }
 
+.menu-subtitle {
+    text-align: center;
+    font-size: 32px;
+    color: var(--green);
+    margin: 55px 0 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--gold);
+}
+
+#drinkCategories {
+    margin-top: 20px;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 0;
+}
+
+.menu-item h4 {
+    flex: 1;
+    margin: 0;
+    text-align: left;
+}
+
+.menu-item-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    min-width: 90px;
+    gap: 3px;
+    text-align: right;
+}
+
+.menu-price {
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+.menu-quantity {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+/* Étlap és itallap – név balra, ár jobbra */
+.menu-category .menu-item {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100%;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+.menu-category .menu-item-info {
+    flex: 1;
+    min-width: 0;
+    text-align: left !important;
+}
+
+.menu-category .menu-item-info h4 {
+    text-align: left !important;
+    margin: 0;
+}
+
+.menu-category .menu-item-right {
+    flex-shrink: 0;
+    margin-left: auto;
+    text-align: right;
+    align-items: flex-end;
+}
+
+/* HÉTVÉGI AJÁNLATOK */
+
+.weekend-offers {
+    padding: 80px 8%;
+    background: #f3efe4;
+    text-align: center;
+}
+
+.weekend-offers .section-heading {
+    margin-bottom: 40px;
+}
+
+.weekend-offers .section-subtitle {
+    display: block;
+    color: #8b7445;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+.weekend-offers .section-heading h2 {
+    color: #35452d;
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 44px);
+    margin-bottom: 12px;
+}
+
+.weekend-offers .section-heading p {
+    color: #6b6659;
+    font-size: 16px;
+}
+
+.weekend-offers-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.weekend-offer-card {
+    padding: 30px 22px;
+    background: #fffdf7;
+    border: 1px solid #d8cfb9;
+    border-radius: 8px;
+    box-shadow: 0 5px 18px rgba(49, 55, 37, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.weekend-offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(49, 55, 37, 0.14);
+}
+
+.weekend-offer-card h3 {
+    color: #35452d;
+    font-family: Georgia, serif;
+    font-size: 21px;
+    margin: 0 0 18px;
+}
+
+.weekend-offer-price {
+    color: #98733b;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.offers-loading {
+    grid-column: 1 / -1;
+    color: #6b6659;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    .weekend-offers {
+        padding: 55px 6%;
+    }
+
+    .weekend-offers-grid {
+        grid-template-columns: 1fr;
+    }
+}
 

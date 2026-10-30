@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fenyves Vendéglő – Admin</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 16px;
+            background: #f1eee5;
+            color: #302d24;
+            font-family: Arial, sans-serif;
+        }
+
+        .admin-container {
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px #00000012;
+        }
+
+        h1, h2 {
+            color: #35452d;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 13px;
+            margin: 7px 0;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input {
+            border: 1px solid #ccc;
+        }
+
+        button {
+            border: 0;
+            background: #35452d;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #526943;
+        }
+
+        .offer {
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .offer-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .offer-actions button {
+            margin: 0;
+        }
+
+        .delete-button {
+            background: #963d32;
+        }
+
+        #admin-panel, #logout-button {
+            display: none;
+        }
+
+        #status {
+            margin-top: 12px;
+            color: #526943;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="admin-container">
+        <h1>Fenyves Vendéglő</h1>
+        <p>Hétvégi ajánlatok kezelése</p>
+
+        <section id="login-panel">
+            <h2>Admin bejelentkezés</h2>
+
+            <form id="login-form">
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="E-mail-cím"
+                    required
+                >
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Jelszó"
+                    required
+                >
+
+                <button type="submit">Bejelentkezés</button>
+            </form>
+        </section>
+
+        <section id="admin-panel">
+            <h2>Új hétvégi ajánlat</h2>
+
+            <form id="offer-form">
+                <input
+                    id="offer-name"
+                    type="text"
+                    placeholder="Étel neve"
+                    maxlength="150"
+                    required
+                >
+
+                <input
+                    id="offer-price"
+                    type="text"
+                    placeholder="Ár (pl. 3 990 Ft)"
+                    maxlength="40"
+                    required
+                >
+
+                <button type="submit">Ajánlat hozzáadása</button>
+            </form>
+
+            <h2>Jelenlegi ajánlatok</h2>
+            <div id="offers-list"></div>
+        </section>
+
+        <button id="logout-button">Kijelentkezés</button>
+        <p id="status" role="status"></p>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
