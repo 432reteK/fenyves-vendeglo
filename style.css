@@ -2349,3 +2349,37 @@ header nav a:hover,
         padding: 5px 7px;
     }
 }
+
+/* Rendezvények szekció háttérképe */
+.events-section {
+    background-image:
+        linear-gradient(
+            rgba(20, 25, 15, 0.55),
+            rgba(20, 25, 15, 0.55)
+        ),
+        url("tajkep.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Rendezvények szövegének láthatósága */
+.events-section .events-copy {
+    position: relative;
+    z-index: 2;
+}
+
+.events-section .events-copy h2,
+.events-section .events-copy p,
+.events-section .events-copy .eyebrow {
+    color: #fff !important;
+    position: relative;
+    z-index: 2;
+}
+
+.events-section .events-copy h2 em {
+    color: #e5d2a8 !important;
+}
+
+
