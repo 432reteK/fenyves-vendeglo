@@ -2546,3 +2546,34 @@ header nav a:hover,
     }
 }
 
+.weekend-offer-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 22px;
+    background: #fffdf7;
+    border: 1px solid #d8cfb9;
+    border-radius: 8px;
+    box-shadow: 0 5px 18px rgba(49, 55, 37, 0.08);
+    text-align: left;
+}
+
+.weekend-offer-card h3 {
+    flex: 1;
+    min-width: 0;
+    color: #35452d;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    margin: 0;
+}
+
+.weekend-offer-price {
+    flex-shrink: 0;
+    color: #98733b;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+}
+
